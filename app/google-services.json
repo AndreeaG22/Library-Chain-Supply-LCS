@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "784330434525",
+    "project_id": "proiect-ip-5369a",
+    "storage_bucket": "proiect-ip-5369a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784330434525:android:bfe7934d03ad399af63834",
+        "android_client_info": {
+          "package_name": "com.example.lcs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk2bKGMt7Rm6caX38uv3M-n1EZu8ggPMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784330434525:android:354229e30cb1ff43f63834",
+        "android_client_info": {
+          "package_name": "com.lcs.proiectip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk2bKGMt7Rm6caX38uv3M-n1EZu8ggPMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784330434525:android:b0f1f2204bed88aff63834",
+        "android_client_info": {
+          "package_name": "com.teamapp.lcs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk2bKGMt7Rm6caX38uv3M-n1EZu8ggPMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
