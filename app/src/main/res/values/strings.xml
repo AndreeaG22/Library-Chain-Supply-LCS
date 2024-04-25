@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">LCS</string>
-    <string name="not_registered_yet_sign_up">Not Registered Yet , Sign Up !</string>
-    <string name="sign_in">Sign In</string>
-    <string name="type_your_password">Type Your Password</string>
-    <string name="type_your_email">Type your Email</string>
+    <string name="sign_in">Autentificare</string>
+    <string name="type_your_password">Introduceti parola</string>
+    <string name="type_your_email">Introduceti adresa de email</string>
+
+    <string name="error_title">Error</string>
+    <string name="dummy_text">You have an error</string>
+    <string name="okay">Okay</string>
 </resources>

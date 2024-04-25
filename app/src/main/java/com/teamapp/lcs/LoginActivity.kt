@@ -1,14 +1,16 @@
 package com.teamapp.lcs
 
+
+
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.teamapp.lcs.databinding.ActivityLoginBinding
+import com.teamapp.lcs.databinding.ErrorDialogBinding
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -33,15 +35,32 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-
+                        showErrorDialog("E-mail sau parola incorecte!")
                     }
                 }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
-
+                    showErrorDialog("Campurile nu pot fi goale")
             }
         }
     }
+
+
+    private fun showErrorDialog(message: String) {
+        Dialog(this).apply {
+            val dialogBinding =
+                ErrorDialogBinding.inflate(LayoutInflater.from(this@LoginActivity))
+            setContentView(dialogBinding.root)
+            dialogBinding.textView.text = message
+            dialogBinding.dialogTitle.text = "Eroare"
+            dialogBinding.dialogPositiveButton.text = "OK"
+
+            dialogBinding.dialogPositiveButton.setOnClickListener {
+                dismiss()
+            }
+            setCancelable(false)
+            show()
+        }
+    }
+
 
 }
