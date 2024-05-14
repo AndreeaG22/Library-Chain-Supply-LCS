@@ -7,4 +7,6 @@
     <string name="error_title">Error</string>
     <string name="dummy_text">You have an error</string>
     <string name="okay">Okay</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>
