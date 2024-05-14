@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_header"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@drawable/header"
+    android:background="@drawable/menu_color"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
@@ -14,6 +15,7 @@
         android:src="@drawable/ic_acc_circle" />
 
     <TextView
+        android:id="@+id/nav_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bine ai venit!"

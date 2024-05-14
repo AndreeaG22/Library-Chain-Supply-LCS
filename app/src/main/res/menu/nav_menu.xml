@@ -13,27 +13,27 @@
         <item
             android:id="@+id/send_order"
             android:title="Trimite comanda"
-            android:icon="@drawable/ic_home" />
+            android:icon="@drawable/ic_send" />
 
         <item
             android:id="@+id/resources"
             android:title="Gestionare resurse"
-            android:icon="@drawable/ic_home" />
+            android:icon="@drawable/ic_resources" />
 
         <item
             android:id="@+id/order_history"
             android:title="Istoric facturi"
-            android:icon="@drawable/ic_home" />
+            android:icon="@drawable/ic_history" />
 
         <item
             android:id="@+id/add_clients"
             android:title="Adauga clienti"
-            android:icon="@drawable/ic_home" />
+            android:icon="@drawable/ic_clients" />
 
         <item
             android:id="@+id/add_workers"
             android:title="Adauga angajati"
-            android:icon="@drawable/ic_home" />
+            android:icon="@drawable/ic_worker" />
 
     </group>
 
@@ -42,7 +42,7 @@
         <menu>
             <item
                 android:id="@+id/logout"
-                android:icon="@drawable/ic_home"
+                android:icon="@drawable/ic_logout"
                 android:title="Delogare" />
 
         </menu>

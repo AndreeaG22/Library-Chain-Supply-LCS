@@ -28,6 +28,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="gigel@lcs.ro"
             android:hint="@string/type_your_email"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -51,6 +52,7 @@
             android:id="@+id/passET"
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
+            android:text="123456"
             android:layout_height="wrap_content"
             android:hint="@string/type_your_password"
             android:inputType="textPassword" />
