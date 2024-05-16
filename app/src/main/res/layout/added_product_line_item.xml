@@ -41,7 +41,7 @@
             app:layout_constraintStart_toEndOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent"
             android:textStyle="bold"
-            tools:text="2 bucati"
+            tools:text="1"
             android:visibility="gone"/>
 
         <TextView
