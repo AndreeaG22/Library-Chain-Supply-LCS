@@ -6,9 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.teamapp.home.HomeOldLineItemAdapter
 import com.teamapp.lcs.R
+import com.teamapp.lcs.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var homeOldListAdapter: HomeOldLineItemAdapter
+    private lateinit var homeFutureListAdapter: HomeFutureLineItemAdapter
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -16,16 +23,58 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUI()
+
+        val homeOldList = listOf(
+            OldLineData("John Doe", "1234", 5, 100),
+            OldLineData("Jane Doe", "5678", 10, 200),
+            OldLineData("John Smith", "91011", 15, 300),
+            OldLineData("Jane Smith", "121314", 20, 400),
+            OldLineData("John Johnson", "151617", 25, 500),
+        )
+        homeOldListAdapter.submitList(homeOldList)
+
+        val homeFutureList = listOf(
+            FutureLineData("John Doe", "2021-12-31", 5, 100),
+            FutureLineData("Jane Doe", "2022-01-31", 10, 200),
+            FutureLineData("John Smith", "2022-02-28", 15, 300),
+            FutureLineData("Jane Smith", "2022-03-31", 20, 400),
+            FutureLineData("John Johnson", "2022-04-30", 25, 500),
+        )
+
+        homeFutureListAdapter.submitList(homeFutureList)
+    }
+
+    private fun initUI() {
+        homeOldListAdapter = HomeOldLineItemAdapter { item ->
+            // Handle item deletion if needed
+        }
+        binding.homeOldList.apply {
+            adapter = homeOldListAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        homeFutureListAdapter = HomeFutureLineItemAdapter { item ->
+            // Handle item deletion if needed
+        }
+        binding.homeFutureList.apply {
+            adapter = homeFutureListAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 }
