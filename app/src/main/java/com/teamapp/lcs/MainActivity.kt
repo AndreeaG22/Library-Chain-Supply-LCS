@@ -13,6 +13,7 @@ import com.teamapp.client_management.ClientManagementFragment
 import com.teamapp.employee_management.EmployeeManagementFragment
 import com.teamapp.home.HomeFragment
 import com.teamapp.lcs.databinding.ActivityMainBinding
+import com.teamapp.receipt_history.ReceiptHistoryFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -83,6 +84,12 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbarTitle.text = "Gestionare clienti"
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, ClientManagementFragment())
+                        .commit()
+                }
+                R.id.receipt_history -> {
+                    binding.toolbarTitle.text = "Istoric facturi"
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, ReceiptHistoryFragment())
                         .commit()
                 }
                 R.id.logout -> {

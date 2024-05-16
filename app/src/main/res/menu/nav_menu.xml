@@ -21,7 +21,7 @@
             android:icon="@drawable/ic_resources" />
 
         <item
-            android:id="@+id/order_history"
+            android:id="@+id/receipt_history"
             android:title="Istoric facturi"
             android:icon="@drawable/ic_history" />
 
