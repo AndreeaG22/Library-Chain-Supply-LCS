@@ -14,6 +14,7 @@ import com.teamapp.employee_management.EmployeeManagementFragment
 import com.teamapp.home.HomeFragment
 import com.teamapp.lcs.databinding.ActivityMainBinding
 import com.teamapp.receipt_history.ReceiptHistoryFragment
+import com.teamapp.resources_management.ResourcesManagementFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -92,8 +93,13 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.fragment_container, ReceiptHistoryFragment())
                         .commit()
                 }
+                R.id.resources -> {
+                    binding.toolbarTitle.text = "Gestionare resurse"
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, ResourcesManagementFragment())
+                        .commit()
+                }
                 R.id.logout -> {
-//                    Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                     FirebaseAuth.getInstance().signOut()
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
