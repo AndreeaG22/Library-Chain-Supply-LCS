@@ -26,14 +26,14 @@
             android:icon="@drawable/ic_history" />
 
         <item
-            android:id="@+id/add_clients"
-            android:title="Adauga clienti"
+            android:id="@+id/manage_clients"
+            android:title="Gestionare clienti"
             android:icon="@drawable/ic_clients" />
 
         <item
-            android:id="@+id/add_workers"
-            android:title="Adauga angajati"
-            android:icon="@drawable/ic_worker" />
+            android:id="@+id/manage_workers"
+            android:icon="@drawable/ic_worker"
+            android:title="Gestionare angajati" />
 
     </group>
 

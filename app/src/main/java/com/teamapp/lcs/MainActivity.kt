@@ -3,18 +3,13 @@ package com.teamapp.lcs
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.teamapp.client_management.ClientManagementFragment
 import com.teamapp.employee_management.EmployeeManagementFragment
 import com.teamapp.home.HomeFragment
 import com.teamapp.lcs.databinding.ActivityMainBinding
@@ -78,10 +73,16 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.fragment_container, HomeFragment())
                         .commit()
                 }
-                R.id.add_workers -> {
+                R.id.manage_workers -> {
                     binding.toolbarTitle.text = "Gestionare angajati"
                         supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, EmployeeManagementFragment())
+                        .commit()
+                }
+                R.id.manage_clients -> {
+                    binding.toolbarTitle.text = "Gestionare clienti"
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, ClientManagementFragment())
                         .commit()
                 }
                 R.id.logout -> {
