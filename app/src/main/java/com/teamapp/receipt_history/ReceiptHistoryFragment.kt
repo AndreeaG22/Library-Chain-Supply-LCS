@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.teamapp.client_management.ClientLineItemAdapter
 import com.teamapp.lcs.R
-import com.teamapp.lcs.databinding.FragmentClientManagementBinding
+import com.teamapp.lcs.databinding.FragmentReceiptHistoryBinding
 
 class ReceiptHistoryFragment : Fragment() {
     private var _binding: FragmentReceiptHistoryBinding? = null
     private val binding get() = _binding!!
-    private lateinit var clientListAdapter: ReceiptLineItemAdapter
+    private lateinit var receiptListAdapter: ReceiptLineItemAdapter
 
     companion object {
         fun newInstance() = ReceiptHistoryFragment()
@@ -30,25 +29,25 @@ class ReceiptHistoryFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUI()
+        val receiptList = listOf("Receipt 1", "Receipt 2", "Receipt 3", "Receipt 4", "Receipt 5")
+        receiptListAdapter.submitList(receiptList)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     private fun initUI() {
-        clientListAdapter = ReceiptLineItemAdapter { item ->
+        receiptListAdapter = ReceiptLineItemAdapter { item ->
             // Handle item deletion if needed
         }
         binding.receiptList.apply {
-            adapter = clientListAdapter
+            adapter = receiptListAdapter
             layoutManager = LinearLayoutManager(requireContext())
-        }
-
-        binding.addReceiptButton.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, AddReceiptFragment())
-                .addToBackStack(null)
-                .commit()
         }
     }
 }
