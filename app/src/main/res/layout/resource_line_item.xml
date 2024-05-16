@@ -13,6 +13,13 @@
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.52" />
+
         <TextView
             android:id="@+id/resName"
             android:layout_width="wrap_content"
@@ -30,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="484dp"
             android:layout_marginEnd="12dp"
+            android:textSize="15dp"
             android:backgroundTint="@color/yellow"
             android:text="Comanda"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +51,7 @@
             android:layout_height="wrap_content"
             android:text="86"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/resOrderButton"
-            app:layout_constraintStart_toEndOf="@+id/resName"
+            app:layout_constraintStart_toStartOf="@+id/gl2"
             app:layout_constraintTop_toTopOf="parent" />
 
 

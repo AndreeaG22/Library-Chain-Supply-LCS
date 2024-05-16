@@ -15,6 +15,7 @@ import com.teamapp.home.HomeFragment
 import com.teamapp.lcs.databinding.ActivityMainBinding
 import com.teamapp.receipt_history.ReceiptHistoryFragment
 import com.teamapp.resources_management.ResourcesManagementFragment
+import com.teamapp.send_order.SendOrderFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,6 +74,12 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbarTitle.text = "Acasa"
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, HomeFragment())
+                        .commit()
+                }
+                R.id.send_order -> {
+                    binding.toolbarTitle.text = "Trimite comanda"
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, SendOrderFragment())
                         .commit()
                 }
                 R.id.manage_workers -> {

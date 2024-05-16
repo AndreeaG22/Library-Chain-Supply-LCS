@@ -69,7 +69,8 @@ class ResourcesManagementFragment : Fragment() {
                 OrderProductLayoutBinding.inflate(LayoutInflater.from(binding.root.context))
             setContentView(dialogBinding.root)
             dialogBinding.orderTitle.text = "Comanda Produs"
-            dialogBinding.orderButton.text = "Comanda"
+            dialogBinding.closeButton.text = "Inchide"
+            dialogBinding.sendResourceOrderButton.text = "Trimite comanda"
             dialogBinding.orderTextView.text = "Comanda produsul ${item.name}"
 
             var qty = dialogBinding.quantityEditText.text.toString().toInt()
@@ -91,7 +92,11 @@ class ResourcesManagementFragment : Fragment() {
                 dialogBinding.quantityEditText.setText((qty).toString())
             }
 
-            dialogBinding.orderButton.setOnClickListener {
+            dialogBinding.closeButton.setOnClickListener {
+                dismiss()
+            }
+
+            dialogBinding.sendResourceOrderButton.setOnClickListener {
                 Toast.makeText(context, "Comanda trimisa pentru ${qty} bucati", Toast.LENGTH_SHORT)
                     .show()
                 dismiss()
