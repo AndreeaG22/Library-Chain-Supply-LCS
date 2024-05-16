@@ -1,13 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.teamapp.client_management.AddClientFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_marginTop="8dp">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRV1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHAux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.40" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.60" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.80" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.40" />
+
+
+        <TextView
+            android:id="@+id/empEmailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E-mail"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/empEmail"/>
+
+        <EditText
+            android:id="@+id/empEmail"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginBottom="@dimen/margin_bottom"
+            android:textSize="14sp"
+            android:hint="  Adauga email"
+            android:background="@drawable/edit_text_border"
+            android:inputType="textEmailAddress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH1"/>
+
+        <TextView
+            android:id="@+id/empNumeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresa"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/empName"/>
+
+
+        <EditText
+            android:id="@+id/empName"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginBottom="@dimen/margin_bottom"
+            android:textSize="14sp"
+            android:hint="  Adauga adresa"
+            android:background="@drawable/edit_text_border"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineH2"/>
+
+
+
+
+
+        <DatePicker
+            android:id="@+id/empDatePicker"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/guidelineHAux"
+            app:layout_constraintBottom_toBottomOf="@+id/guidelineH4"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:background="@drawable/edit_text_border"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/empDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data livrarii"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="@id/guidelineH2"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:id="@+id/empDate"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginTop="4dp"
+            android:textSize="20sp"
+            android:contextClickable="false"
+            android:textAlignment="center"
+            android:text="  01-01-1997"
+            android:background="@drawable/edit_text_border"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/guidelineH4"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productsToAdd"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guidelineRV1"
+            app:layout_constraintBottom_toTopOf="@id/guidelineH2"
+            tools:listitem="@layout/product_line_item"/>
+
+        <TextView
+            android:id="@+id/addProductsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alegeti produsele"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addedProducts"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addedProductsTitle"
+            app:layout_constraintBottom_toTopOf="@id/guidelineH4"
+            tools:listitem="@layout/added_product_line_item"/>
+
+        <TextView
+            android:id="@+id/addedProductsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Produse Alese"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/guidelineH2"
+            app:layout_constraintStart_toStartOf="@id/guideline"/>
+
+        <Button
+            android:id="@+id/addEmployeeButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Adauga Client"
+            android:textSize="20sp"
+            android:backgroundTint="@color/yellow"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
