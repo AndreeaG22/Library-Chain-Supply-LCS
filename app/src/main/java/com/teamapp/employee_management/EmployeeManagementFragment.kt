@@ -16,10 +16,6 @@ class EmployeeManagementFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var empListAdapter: EmployeeLineItemAdapter
 
-    companion object {
-        fun newInstance() = EmployeeManagementFragment()
-    }
-
     private val viewModel: EmployeeManagementViewModel by viewModels()
 
     override fun onCreateView(
