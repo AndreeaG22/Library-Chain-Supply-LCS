@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="838dp"
+            android:layout_height="447dp"
+            android:layout_gravity="center"
+            android:background="#FEFBF6">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="419dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineH2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.50" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineH3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.70" />
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/addTitleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/addTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.4"
+                    android:background="#ECB159"
+                    android:gravity="start|center"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="0dp"
+                    android:textAllCaps="true"
+                    android:textColor="#616161"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Adauga Produs" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/closeButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:background="#B67352"
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Inchide" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/addTextView"
+                android:layout_width="245dp"
+                android:layout_height="38dp"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:text="Adauga produsul dorit"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineH2"
+                app:layout_constraintEnd_toStartOf="@+id/gl1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/productNameEditText"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="  Adauga nume produs"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineH2"
+                app:layout_constraintEnd_toStartOf="@+id/gl1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addTextView" />
+
+
+            <TextView
+                android:id="@+id/addPriceView"
+                android:layout_width="245dp"
+                android:layout_height="38dp"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:text="Adauga pretul produsului"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineH2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/gl1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/productPriceEditText"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="  Adauga Pret"
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineH2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="@+id/gl1"
+                app:layout_constraintTop_toBottomOf="@+id/addPriceView" />
+
+
+            <TextView
+                android:id="@+id/noResView"
+                android:layout_width="245dp"
+                android:layout_height="38dp"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:text="Adauga Cantitatea dorita"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
+                app:layout_constraintEnd_toStartOf="@+id/gl1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/stepperLayout"
+                android:layout_width="253dp"
+                android:layout_height="65dp"
+                app:layout_constraintEnd_toStartOf="@+id/gl1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineH3">
+
+                <Button
+                    android:id="@+id/minusButton"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#8CB9BD"
+                    android:text="-"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/quantityEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_weight="1"
+                    android:autofillHints="1"
+                    android:inputType="number"
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Button
+                    android:id="@+id/plusButton"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#8CB9BD"
+                    android:text="+"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <Button
+                android:id="@+id/addResourceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#8CB9BD"
+                android:text="Adauga produs"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/gl1"
+                app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

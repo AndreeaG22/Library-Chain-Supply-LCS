@@ -36,14 +36,7 @@ class ResourcesManagementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        val resList = listOf(
-            Product("Resource 1", 10),
-            Product("Resource 2", 20),
-            Product("Resource 3", 30),
-            Product("Resource 4", 40),
-            Product("Resource 5", 50)
-        )
-        resListAdapter.submitList(resList)
+        observeViewModel()
     }
 
     override fun onDestroyView() {
@@ -58,6 +51,12 @@ class ResourcesManagementFragment : Fragment() {
         binding.resList.apply {
             adapter = resListAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.products.observe(viewLifecycleOwner) { products ->
+            resListAdapter.submitList(products)
         }
     }
 
@@ -99,6 +98,7 @@ class ResourcesManagementFragment : Fragment() {
             dialogBinding.sendResourceOrderButton.setOnClickListener {
                 Toast.makeText(context, "Comanda trimisa pentru ${qty} bucati", Toast.LENGTH_SHORT)
                     .show()
+                viewModel.addResource(item.name, qty)
                 dismiss()
             }
             show()
