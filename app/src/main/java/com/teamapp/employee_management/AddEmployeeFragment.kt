@@ -9,9 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 import com.teamapp.lcs.R
 import com.teamapp.lcs.databinding.ErrorDialogBinding
 import com.teamapp.lcs.databinding.FragmentAddEmployeeBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class AddEmployeeFragment : Fragment() {
@@ -19,9 +22,7 @@ class AddEmployeeFragment : Fragment() {
     private var _binding: FragmentAddEmployeeBinding? = null
     private val binding get() = _binding!!
 
-
     private val viewModel: AddEmployeeViewModel by viewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +36,7 @@ class AddEmployeeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        observeViewModel()
     }
 
     override fun onDestroyView() {
@@ -45,12 +47,6 @@ class AddEmployeeFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initUI() {
         val calendar = Calendar.getInstance()
-        var email: String = ""
-        var name: String = ""
-        var code: String = ""
-        var role: String = ""
-        var phone: String = ""
-        var date: String = ""
 
         // Initialize DatePicker with current date
         binding.empDatePicker.init(
@@ -71,20 +67,34 @@ class AddEmployeeFragment : Fragment() {
         binding.empDate.isClickable = false
         binding.empDate.isFocusable = false
 
-
         binding.addEmployeeButton.setOnClickListener {
             if (binding.empEmail.text.isNotEmpty() && binding.empName.text.isNotEmpty() && binding.empCnp.text.isNotEmpty() && binding.empRole.text.isNotEmpty() && binding.empPhone.text.isNotEmpty()) {
-                email = binding.empEmail.text.toString()
-                name = binding.empName.text.toString()
-                code = binding.empCnp.text.toString()
-                role = binding.empRole.text.toString()
-                phone = binding.empPhone.text.toString()
-                date = binding.empDate.text.toString()
-//                viewModel.addEmployee(email, name, code, role, phone, date)
-                parentFragmentManager.popBackStack()
+                val email = binding.empEmail.text.toString()
+                val name = binding.empName.text.toString()
+                val code = binding.empCnp.text.toString()
+                val role = binding.empRole.text.toString()
+                val phone = binding.empPhone.text.toString()
+                val date = binding.empDate.text.toString()
+
+                // Trigger addEmployee function in ViewModel
+                viewModel.addEmployee(email, name, code, role, phone, date)
             } else {
                 // Show error dialog if any field is empty
                 showErrorDialog("Campurile nu pot fi goale")
+            }
+        }
+    }
+
+    private fun observeViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.addEmployeeResult.collect { result ->
+                result?.let {
+                    if (it.first) {
+                        showSuccessDialog(it.second)
+                    } else {
+                        showErrorDialog(it.second)
+                    }
+                }
             }
         }
     }
@@ -106,4 +116,20 @@ class AddEmployeeFragment : Fragment() {
         }
     }
 
+    private fun showSuccessDialog(message: String) {
+        Dialog(requireContext()).apply {
+            val dialogBinding =
+                ErrorDialogBinding.inflate(LayoutInflater.from(requireContext()))
+            setContentView(dialogBinding.root)
+            dialogBinding.textView.text = message
+            dialogBinding.dialogTitle.text = "Succes"
+            dialogBinding.dialogPositiveButton.text = "OK"
+
+            dialogBinding.dialogPositiveButton.setOnClickListener {
+                dismiss()
+            }
+            setCancelable(false)
+            show()
+        }
+    }
 }
