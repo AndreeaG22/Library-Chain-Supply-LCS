@@ -29,10 +29,6 @@ class ClientLineItemAdapter (
         fun bind(item: String) {
             binding.apply {
                 clientName.text = item
-                ivDelete.setOnClickListener {
-                    onItemDeleted(item)
-                }
-
             }
         }
     }
