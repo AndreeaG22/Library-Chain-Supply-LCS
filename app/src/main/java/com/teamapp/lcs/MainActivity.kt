@@ -8,7 +8,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.database
 import com.teamapp.client_management.ClientManagementFragment
 import com.teamapp.employee_management.EmployeeManagementFragment
 import com.teamapp.home.HomeFragment
