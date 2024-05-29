@@ -213,7 +213,6 @@
                 android:layout_margin="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.866"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:listitem="@layout/home_future_line_item" />
 
