@@ -30,11 +30,16 @@ class ClientManagementFragment : Fragment() {
         return binding.root
     }
 
+    private fun observeViewModel() {
+        viewModel.clients.observe(viewLifecycleOwner) { clients ->
+            clientListAdapter.submitList(clients)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        val clientList = listOf("Client 1", "Client 2", "Client 3", "Client 4", "Client 5")
-        clientListAdapter.submitList(clientList)
+        observeViewModel()
     }
 
     override fun onDestroyView() {

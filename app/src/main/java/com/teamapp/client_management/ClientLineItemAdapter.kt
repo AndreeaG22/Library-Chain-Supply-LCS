@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teamapp.lcs.databinding.ClientLineItemBinding
 
 class ClientLineItemAdapter (
-    private val onItemDeleted: (item: String) -> Unit
-): ListAdapter<String, RecyclerView.ViewHolder>(DiffCallback) {
+    private val onItemDeleted: (item: Client) -> Unit
+): ListAdapter<Client, RecyclerView.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ClientLnItmViewHolder(
@@ -26,19 +26,20 @@ class ClientLineItemAdapter (
     }
 
     inner class ClientLnItmViewHolder(val binding: ClientLineItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: String) {
+        fun bind(item: Client) {
             binding.apply {
-                clientName.text = item
+                clientName.text = item.email
+                clientAddress.text = item.address
             }
         }
     }
 
-    object DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    object DiffCallback : DiffUtil.ItemCallback<Client>() {
+        override fun areItemsTheSame(oldItem: Client, newItem: Client): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: Client, newItem: Client): Boolean {
             return oldItem == newItem
         }
     }
