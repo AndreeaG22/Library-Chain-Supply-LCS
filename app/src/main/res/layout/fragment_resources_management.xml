@@ -39,6 +39,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
 
         <TextView
             android:id="@+id/resListTitle"
@@ -86,7 +93,19 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/resource_line_item" />
 
+        <Button
+            android:id="@+id/addResource"
+            android:layout_width="251dp"
 
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="92dp"
+            android:backgroundTint="@color/yellow"
+            android:text="Adauga produs"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/gl3"
+            app:layout_constraintTop_toBottomOf="@+id/resList" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
