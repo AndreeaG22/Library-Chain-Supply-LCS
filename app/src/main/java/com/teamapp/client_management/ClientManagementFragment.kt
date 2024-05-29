@@ -31,10 +31,9 @@ class ClientManagementFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.clients.observe(viewLifecycleOwner, { clients ->
-            val clientEmails = clients.map { it.email }
-            clientListAdapter.submitList(clientEmails)
-        })
+        viewModel.clients.observe(viewLifecycleOwner) { clients ->
+            clientListAdapter.submitList(clients)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
