@@ -1,5 +1,6 @@
 package com.teamapp.client_management
 
+import android.app.Dialog
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,8 +12,7 @@ import android.widget.CursorAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamapp.lcs.R
 import com.teamapp.lcs.databinding.FragmentAddClientBinding
-import com.teamapp.client_management.Product
-import com.teamapp.lcs.databinding.FragmentAddEmployeeBinding
+import com.teamapp.lcs.databinding.ErrorDialogBinding
 import java.util.Calendar
 
 class AddClientFragment : Fragment() {
@@ -77,23 +77,53 @@ class AddClientFragment : Fragment() {
         }
 
         val calendar = Calendar.getInstance()
-        binding.empDatePicker.init(
+        binding.cltDatePicker.init(
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         ) { view, year, month, day ->
             // Update selectedDate and TextView when date is changed
             val selectedDate = "$day/${month + 1}/$year"
-            binding.empDate.setText(selectedDate)
+            binding.cltDate.setText(selectedDate)
         }
 
         // Set initial date in TextView
         val initialDate = "${calendar.get(Calendar.DAY_OF_MONTH)}/${calendar.get(Calendar.MONTH) + 1}/${calendar.get(
             Calendar.YEAR)}"
-        binding.empDate.setText(initialDate)
+        binding.cltDate.setText(initialDate)
 
         // Make the TextView non-clickable and non-focusable
-        binding.empDate.isClickable = false
-        binding.empDate.isFocusable = false
+        binding.cltDate.isClickable = false
+        binding.cltDate.isFocusable = false
+
+        binding.addClientButton.setOnClickListener {
+            if (binding.cltAddress.text.toString().isNotEmpty() && binding.cltEmail.text.toString().isNotEmpty()) {
+                val address = binding.cltAddress.text.toString()
+                val email = binding.cltEmail.text.toString()
+                val dateDelivery = binding.cltDate.text.toString()
+                val products = addedProductLineItemAdapter.currentList
+                viewModel.addClient(address, email, dateDelivery, products)
+            } else {
+                showErrorDialog("Campurile nu pot fi goale")
+            }
+        }
     }
+
+    private fun showErrorDialog(message: String) {
+        Dialog(requireContext()).apply {
+            val dialogBinding =
+                ErrorDialogBinding.inflate(LayoutInflater.from(requireContext()))
+            setContentView(dialogBinding.root)
+            dialogBinding.textView.text = message
+            dialogBinding.dialogTitle.text = "Eroare"
+            dialogBinding.dialogPositiveButton.text = "OK"
+
+            dialogBinding.dialogPositiveButton.setOnClickListener {
+                dismiss()
+            }
+            setCancelable(false)
+            show()
+        }
+    }
+
 }
