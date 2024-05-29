@@ -19,7 +19,7 @@ class ResourcesManagementViewModel : ViewModel() {
         fetchProducts()
     }
 
-    fun addResource(name: String, qty: Int) {
+    fun supplyResource(name: String, qty: Int) {
         val productRef = myRef.child(name)
 
         productRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -58,5 +58,12 @@ class ResourcesManagementViewModel : ViewModel() {
                 // Failed to read value
             }
         })
+    }
+
+    fun addResource(name: String, qty: Int, price: Double) {
+        // add resource to database
+        val product = Product(name, qty, price)
+        myRef.child(name).setValue(product)
+        fetchProducts()
     }
 }
