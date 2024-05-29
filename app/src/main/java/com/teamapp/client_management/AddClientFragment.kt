@@ -42,17 +42,14 @@ class AddClientFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        val products = listOf(
-            Product("Caiet"),
-            Product("Pix"),
-            Product("Creion"),
-            Product("Radiera"),
-            Product("Foarfeca"),
-            Product("Creta")
-        )
-        productLineItemAdapter.submitList(products.toMutableList())
+        observeViewModel()
     }
 
+    private fun observeViewModel() {
+        viewModel.products.observe(viewLifecycleOwner) { products ->
+            productLineItemAdapter.submitList(products)
+        }
+    }
     private fun initUI() {
         // Initialize UI components
 
