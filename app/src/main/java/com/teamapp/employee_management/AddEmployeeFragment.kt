@@ -78,6 +78,9 @@ class AddEmployeeFragment : Fragment() {
 
                 // Trigger addEmployee function in ViewModel
                 viewModel.addEmployee(email, name, code, role, phone, date)
+
+                // go back to previous fragment
+                requireActivity().supportFragmentManager.popBackStack()
             } else {
                 // Show error dialog if any field is empty
                 showErrorDialog("Campurile nu pot fi goale")
