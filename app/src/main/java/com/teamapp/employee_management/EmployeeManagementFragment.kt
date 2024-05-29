@@ -33,9 +33,9 @@ class EmployeeManagementFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initUI()
 
-        viewModel.employeeNames.observe(viewLifecycleOwner) { empList ->
-            empListAdapter.submitList(empList)
-        }
+        viewModel.employees.observe(viewLifecycleOwner, Observer {
+            empListAdapter.submitList(it)
+        })
 
         viewModel.iterateDatabaseItems(Firebase.database.reference.child("employees"))
     }
@@ -48,6 +48,7 @@ class EmployeeManagementFragment : Fragment() {
     private fun initUI() {
         empListAdapter = EmployeeLineItemAdapter { item ->
             // Handle item deletion if needed
+            viewModel.deleteEmployee(Firebase.database.reference, item)
         }
         binding.empList.apply {
             adapter = empListAdapter
