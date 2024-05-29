@@ -30,7 +30,7 @@ class HomeFutureLineItemAdapter (
             binding.apply {
                 receiverName.text = item.receiver
                 dateOrder.text = item.date
-                priority.text = item.priority.toString()
+                priority.text = item.address.toString()
                 totalSum.text = item.totalSum.toString()
             }
         }

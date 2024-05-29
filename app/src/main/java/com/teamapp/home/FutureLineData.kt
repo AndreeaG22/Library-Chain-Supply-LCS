@@ -3,7 +3,7 @@ package com.teamapp.home
 class FutureLineData (
     val receiver: String,
     val date: String,
-    val priority: Int,
+    val address: String,
     val totalSum: Int
 ) {
     override fun equals(other: Any?): Boolean {
@@ -14,7 +14,7 @@ class FutureLineData (
 
         if (receiver != other.receiver) return false
         if (date != other.date) return false
-        if (priority != other.priority) return false
+        if (address != other.address) return false
         if (totalSum != other.totalSum) return false
 
         return true
@@ -23,7 +23,7 @@ class FutureLineData (
     override fun hashCode(): Int {
         var result = receiver.hashCode()
         result = 31 * result + date.hashCode()
-        result = 31 * result + priority.hashCode()
+        result = 31 * result + address.hashCode()
         result = 31 * result + totalSum
         return result
     }

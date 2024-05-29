@@ -48,18 +48,14 @@ class HomeFragment : Fragment() {
             OldLineData("John Johnson", "151617", 25, 500),
         )
         homeOldListAdapter.submitList(homeOldList)
+        observeViewModel()
 
-        val homeFutureList = listOf(
-            FutureLineData("John Doe", "2021-12-31", 5, 100),
-            FutureLineData("Jane Doe", "2022-01-31", 10, 200),
-            FutureLineData("John Smith", "2022-02-28", 15, 300),
-            FutureLineData("Jane Smith", "2022-03-31", 20, 400),
-            FutureLineData("John Johnson", "2022-04-30", 25, 500),
-        )
-
-        homeFutureListAdapter.submitList(homeFutureList)
     }
-
+    private fun observeViewModel() {
+        viewModel.futureOrders.observe(viewLifecycleOwner) { homeFutureList ->
+            homeFutureListAdapter.submitList(homeFutureList)
+        }
+    }
     private fun initUI() {
         homeOldListAdapter = HomeOldLineItemAdapter { item ->
             // Handle item deletion if needed
