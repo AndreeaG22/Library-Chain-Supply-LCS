@@ -100,6 +100,8 @@ class AddClientFragment : Fragment() {
                 val dateDelivery = binding.cltDate.text.toString()
                 val products = addedProductLineItemAdapter.currentList
                 viewModel.addClient(address, email, dateDelivery, products)
+
+                requireActivity().supportFragmentManager.popBackStack()
             } else {
                 showErrorDialog("Campurile nu pot fi goale")
             }
