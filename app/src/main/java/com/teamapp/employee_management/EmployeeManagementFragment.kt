@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 import com.teamapp.lcs.R
 import com.teamapp.lcs.databinding.FragmentEmployeeManagementBinding
 
@@ -29,8 +32,12 @@ class EmployeeManagementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        val empList = listOf("Employee 1", "Employee 2", "Employee 3", "Employee 4", "Employee 5")
-        empListAdapter.submitList(empList)
+
+        viewModel.employeeNames.observe(viewLifecycleOwner) { empList ->
+            empListAdapter.submitList(empList)
+        }
+
+        viewModel.iterateDatabaseItems(Firebase.database.reference.child("employees"))
     }
 
     override fun onDestroyView() {
