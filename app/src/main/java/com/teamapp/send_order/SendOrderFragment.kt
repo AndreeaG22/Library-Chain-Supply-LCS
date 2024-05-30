@@ -50,16 +50,6 @@ class SendOrderFragment : Fragment() {
     private fun initUI() {
         var qty = 0
         var totalPrice = 0.0
-        binding.sendOrderButton.setOnClickListener {
-            // Send order
-            Toast.makeText(requireContext(), "Order sent!", Toast.LENGTH_SHORT).show()
-            // go back to previous fragment go back to previous fragment
-//            parentFragmentManager.popBackStack() // TODO: check if this works
-            // clear back stack and go to home fragment
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, HomeFragment.newInstance())
-                .commit()
-        }
 
         addedProductLineItemAdapter = AddedProductLineItemAdapter { item ->
 //            viewModel.removeProduct(item)
@@ -77,7 +67,24 @@ class SendOrderFragment : Fragment() {
             binding.textView3.text = qty.toString()
         }
 
-
+        binding.sendOrderButton.setOnClickListener {
+            viewModel.sendOrder(
+                addedProductLineItemAdapter.currentList,
+                totalPrice,
+                binding.recipientsAddress.text.toString(),
+                binding.recipientName.text.toString(),
+                // get me the current date
+                "2024-05-31"
+            )
+            // Send order
+            Toast.makeText(requireContext(), "Order sent!", Toast.LENGTH_SHORT).show()
+            // go back to previous fragment go back to previous fragment
+//            parentFragmentManager.popBackStack() // TODO: check if this works
+            // clear back stack and go to home fragment
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment.newInstance())
+                .commit()
+        }
 
         binding.productsToAdd.apply {
             adapter = productLineItemAdapter

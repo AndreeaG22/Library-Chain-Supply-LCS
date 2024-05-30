@@ -7,10 +7,27 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.teamapp.ReceiptData
 
 class SendOrderViewModel : ViewModel() {
     val _products = MutableLiveData<List<Product>>()
     val products: MutableLiveData<List<Product>> = _products
+
+    fun sendOrder(products: List<Product>, totalPrice: Double,address: String, email: String, date: String) {
+        // Send order to the database
+        val dataBase = Firebase.database
+        val myRef = dataBase.getReference("orders")
+
+        val order = ReceiptData(products, totalPrice, date, address, email)
+        val newOrderRef = myRef.push()
+        newOrderRef.setValue(order).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                println("Order sent successfully.")
+            } else {
+                println("Failed to send order: ${task.exception?.message}")
+            }
+        }
+    }
 
     init {
         getProducts()

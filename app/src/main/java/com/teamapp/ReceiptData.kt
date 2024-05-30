@@ -6,6 +6,7 @@ class ReceiptData(
     val products: List<Product>,
     val totalPrice: Double,
     val date: String,
-    val destination: String) {
-    constructor() : this(emptyList(), 0.0, "", "")
+    val destination: String,
+    val email: String) {
+    constructor() : this(emptyList(), 0.0, "", "", "")
 }
