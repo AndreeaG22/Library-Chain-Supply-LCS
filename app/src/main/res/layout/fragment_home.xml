@@ -125,7 +125,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/homeOldList"
-                android:layout_width="1218dp"
+                android:layout_width="0dp"
                 android:layout_height="210dp"
                 android:layout_margin="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/guidehorizontal2"
@@ -208,7 +208,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/homeFutureList"
-                android:layout_width="1218dp"
+                android:layout_width="0dp"
                 android:layout_height="209dp"
                 android:layout_margin="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
