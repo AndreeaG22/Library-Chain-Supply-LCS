@@ -2,6 +2,7 @@ package com.teamapp.lcs
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -10,6 +11,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.teamapp.client_management.ClientManagementFragment
 import com.teamapp.employee_management.EmployeeManagementFragment
@@ -70,6 +75,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.nav_text).text = email
 
+        email = FirebaseAuth.getInstance().currentUser?.email ?: ""
+        configureMenuItems(binding.navView.menu)
+
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_home -> {
@@ -118,6 +126,34 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+    }
+
+    private fun configureMenuItems(menu: Menu) {
+        menu.findItem(R.id.manage_workers).isVisible = false
+        menu.findItem(R.id.manage_clients).isVisible = false
+
+        val database = FirebaseDatabase.getInstance().reference
+
+        val query = database.child("employees").orderByChild("email").equalTo(email)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Assuming there is only one user with the given email
+                    val userSnapshot = dataSnapshot.children.iterator().next()
+                    val role = userSnapshot.child("role").getValue(String::class.java)
+
+                    // Hide or show menu items based on the user's role
+                    if (role == "administrator") {
+                        menu.findItem(R.id.manage_workers).isVisible = true
+                        menu.findItem(R.id.manage_clients).isVisible = true
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle possible errors.
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
