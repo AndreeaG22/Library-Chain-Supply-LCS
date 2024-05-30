@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teamapp.lcs.databinding.AddedProductLineItemBinding
 
 class AddedProductLineItemAdapter (
-private val onItemDeleted: (item: Product) -> Unit
+private val onQtyChanged: (item: Product) -> Unit,
+//private val onQtyIncreased: (item: Product) -> Boolean
 ): ListAdapter<Product, RecyclerView.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -36,6 +37,21 @@ private val onItemDeleted: (item: Product) -> Unit
 
                 qty.visibility = View.VISIBLE
                 qty.text = item.quantity.toString()
+
+                minus.visibility = View.VISIBLE
+                minus.setOnClickListener {
+                    if (item.quantity > 1) {
+                        item.quantity--
+                        qty.text = item.quantity.toString()
+                        onQtyChanged(item)
+                    }
+                }
+                plus.visibility = View.VISIBLE
+                plus.setOnClickListener {
+                    item.quantity++
+                    qty.text = item.quantity.toString()
+                    onQtyChanged(item)
+                }
 
             }
         }
