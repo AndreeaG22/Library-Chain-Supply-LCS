@@ -5,4 +5,6 @@ class Product(
     val price: Double = 12.0,
     val quantity: Int = 1,
     var isChecked: Boolean = false
-)
+){
+    constructor(): this("", 0.0, 1, false)
+}

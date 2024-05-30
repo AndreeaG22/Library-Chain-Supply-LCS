@@ -38,14 +38,13 @@ class SendOrderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        val productList = listOf(
-            Product("Caiet", 12.0),
-            Product("Pix", 15.0),
-            Product("Creion", 20.0),
-            Product("Radiera", 25.0),
-            Product("Creta", 30.0)
-        )
-        productLineItemAdapter.submitList(productList.toMutableList())
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.products.observe(viewLifecycleOwner) { products ->
+            productLineItemAdapter.submitList(products)
+        }
     }
 
     private fun initUI() {
