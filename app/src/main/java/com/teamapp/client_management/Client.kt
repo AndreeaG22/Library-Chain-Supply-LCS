@@ -1,5 +1,7 @@
 package com.teamapp.client_management
 
+import com.teamapp.send_order.Product
+
 class Client(
     val address: String,
     val email: String,

@@ -7,6 +7,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.teamapp.send_order.Product
 
 class AddClientViewModel : ViewModel() {
     val _products = MutableLiveData<List<Product>>()

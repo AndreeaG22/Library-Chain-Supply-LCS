@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.teamapp.send_order.Product
 
 class ResourcesManagementViewModel : ViewModel() {
 
@@ -29,7 +30,7 @@ class ResourcesManagementViewModel : ViewModel() {
                     val newQty = existingQty + qty
                     productRef.child("qty").setValue(newQty)
                 } else {
-                    val product = Product(name, qty)
+                    val product = Product(name = name, quantity = qty)
                     productRef.setValue(product)
                 }
                 fetchProducts()
@@ -62,7 +63,7 @@ class ResourcesManagementViewModel : ViewModel() {
 
     fun addResource(name: String, qty: Int, price: Double) {
         // add resource to database
-        val product = Product(name, qty, price)
+        val product = Product(name = name, quantity = qty, price = price)
         myRef.child(name).setValue(product)
         fetchProducts()
     }

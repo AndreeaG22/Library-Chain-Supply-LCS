@@ -14,6 +14,7 @@ import com.teamapp.lcs.databinding.AddProductLayoutBinding
 import com.teamapp.lcs.databinding.ErrorDialogBinding
 import com.teamapp.lcs.databinding.FragmentResourcesManagementBinding
 import com.teamapp.lcs.databinding.OrderProductLayoutBinding
+import com.teamapp.send_order.Product
 
 class ResourcesManagementFragment : Fragment() {
 

@@ -9,7 +9,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.teamapp.ReceiptData
 import com.teamapp.client_management.Client
-import com.teamapp.client_management.Product
+import com.teamapp.send_order.Product
 
 class HomeViewModel : ViewModel() {
     val dataBase = Firebase.database

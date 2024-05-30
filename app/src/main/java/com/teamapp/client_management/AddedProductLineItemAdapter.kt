@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.teamapp.lcs.databinding.AddedProductLineItemBinding
+import com.teamapp.send_order.Product
 
 class AddedProductLineItemAdapter (
 private val onItemDeleted: (item: Product) -> Unit

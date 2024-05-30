@@ -1,15 +1,12 @@
 package com.teamapp.resources_management
 
-import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.teamapp.lcs.R
-import com.teamapp.lcs.databinding.OrderProductLayoutBinding
 import com.teamapp.lcs.databinding.ResourceLineItemBinding
+import com.teamapp.send_order.Product
 
 class ResourcesLineItemAdapter (
     private val onItemSelected: (item: Product) -> Unit
@@ -34,7 +31,7 @@ class ResourcesLineItemAdapter (
         fun bind(item: Product) {
             binding.apply {
                 resName.text = item.name
-                resQty.text = item.qty.toString()
+                resQty.text = item.quantity.toString()
 
                 resOrderButton.setOnClickListener {
                     onItemSelected(item)
@@ -47,11 +44,11 @@ class ResourcesLineItemAdapter (
 
     object DiffCallback : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.name == newItem.name && oldItem.qty == newItem.qty
+            return oldItem.name == newItem.name && oldItem.quantity == newItem.quantity
         }
 
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.name == newItem.name && oldItem.qty == newItem.qty
+            return oldItem.name == newItem.name && oldItem.quantity == newItem.quantity
         }
     }
 }
