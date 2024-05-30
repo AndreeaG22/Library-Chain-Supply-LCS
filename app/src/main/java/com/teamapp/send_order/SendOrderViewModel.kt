@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.teamapp.ReceiptData
@@ -27,6 +28,25 @@ class SendOrderViewModel : ViewModel() {
                 println("Failed to send order: ${task.exception?.message}")
             }
         }
+    }
+
+    fun updateQty(item: Product, qty: Int) {
+        val myRef = FirebaseDatabase.getInstance().getReference("Products")
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (productSnapshot in dataSnapshot.children) {
+                    val product = productSnapshot.getValue(Product::class.java)
+                    if (product != null && product.name == item.name) {
+                        product.quantity -= qty
+                        productSnapshot.ref.setValue(product)
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("Database error: ${databaseError.message}")
+            }
+        })
     }
 
     init {

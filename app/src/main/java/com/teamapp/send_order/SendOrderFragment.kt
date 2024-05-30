@@ -77,6 +77,17 @@ class SendOrderFragment : Fragment() {
         }
 
         binding.sendOrderButton.setOnClickListener {
+            if (addedProductLineItemAdapter.currentList.isEmpty()) {
+                Toast.makeText(requireContext(), "Please add products to the order!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (binding.recipientName.text.isEmpty() || binding.recipientsAddress.text.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in the recipient's name and address!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
             viewModel.sendOrder(
                 addedProductLineItemAdapter.currentList,
                 totalPrice,
@@ -84,7 +95,9 @@ class SendOrderFragment : Fragment() {
                 binding.recipientName.text.toString(),
                 generateDate()
             )
-
+            for (product in addedProductLineItemAdapter.currentList) {
+                viewModel.updateQty(product, product.quantity)
+            }
             Toast.makeText(requireContext(), "Order sent!", Toast.LENGTH_SHORT).show()
 
             parentFragmentManager.beginTransaction()
