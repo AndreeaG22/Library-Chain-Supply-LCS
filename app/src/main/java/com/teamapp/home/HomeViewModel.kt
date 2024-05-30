@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.teamapp.client_management.Client
+import com.teamapp.client_management.Product
 
 class HomeViewModel : ViewModel() {
     val dataBase = Firebase.database
@@ -19,10 +20,14 @@ class HomeViewModel : ViewModel() {
         getFutureOrders()
     }
 
-//    private fun getSumProducts(products: List<Product>): Int {
-//        val thisRef = dataBase.getReference("products")
-//
-//    }
+    private fun getSumProducts(products: List<Product>): Double {
+        var sum = 0.0
+        for (product in products) {
+            sum += product.price
+        }
+        return sum
+
+    }
 
     private fun getFutureOrders() {
         myRef.addValueEventListener(object : ValueEventListener {
@@ -35,7 +40,7 @@ class HomeViewModel : ViewModel() {
                             it.address,
                             it.date_deliery,
                             it.address,
-                            0
+                            getSumProducts(it.products)
                         ))
                     }
                 }
