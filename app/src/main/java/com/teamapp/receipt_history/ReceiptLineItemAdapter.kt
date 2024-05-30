@@ -1,15 +1,17 @@
 package com.teamapp.receipt_history
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.teamapp.ReceiptData
 import com.teamapp.lcs.databinding.ReceiptLineItemBinding
 
 class ReceiptLineItemAdapter (
-    private val onItemDeleted: (item: String) -> Unit
-): ListAdapter<String, RecyclerView.ViewHolder>(DiffCallback) {
+    private val onItemDeleted: (item: ReceiptData) -> Unit
+): ListAdapter<ReceiptData, RecyclerView.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ReceiptLnItmViewHolder(
@@ -26,10 +28,11 @@ class ReceiptLineItemAdapter (
     }
 
     inner class ReceiptLnItmViewHolder(val binding: ReceiptLineItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: String) {
+        fun bind(item: ReceiptData) {
             binding.apply {
-                receiptName.text = item
-                dateReceipt.text = "12/12/2021"
+                recipientEmail.text = item.email
+                dateReceipt.text = item.date
+                recipientAddress.text = item.destination
                 ivIcon.setOnClickListener {
                     // create receipt
                 }
@@ -37,12 +40,13 @@ class ReceiptLineItemAdapter (
         }
     }
 
-    object DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    object DiffCallback : DiffUtil.ItemCallback<ReceiptData>() {
+        override fun areItemsTheSame(oldItem: ReceiptData, newItem: ReceiptData): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        @SuppressLint("DiffUtilEquals")
+        override fun areContentsTheSame(oldItem: ReceiptData, newItem: ReceiptData): Boolean {
             return oldItem == newItem
         }
     }

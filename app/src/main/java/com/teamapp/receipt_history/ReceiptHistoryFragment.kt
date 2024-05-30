@@ -32,8 +32,10 @@ class ReceiptHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        val receiptList = listOf("Receipt 1", "Receipt 2", "Receipt 3", "Receipt 4", "Receipt 5")
-        receiptListAdapter.submitList(receiptList)
+        viewModel.getReceipts()
+        viewModel.receipts.observe(viewLifecycleOwner) { receipts ->
+            receiptListAdapter.submitList(receipts)
+        }
     }
 
     override fun onDestroyView() {

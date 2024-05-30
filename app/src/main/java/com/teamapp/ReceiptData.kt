@@ -14,4 +14,12 @@ class ReceiptData(
         val date = date.split("-")
         return "${date[0]}${date[1]}${date[2].substring(2)}${destination.substring(0, 3)}"
     }
+
+    fun equals(other: ReceiptData): Boolean {
+        return this.products == other.products &&
+            this.totalPrice == other.totalPrice &&
+            this.date == other.date &&
+            this.destination == other.destination &&
+            this.email == other.email
+    }
 }
