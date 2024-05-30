@@ -1,6 +1,7 @@
 package com.teamapp.client_management
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -30,6 +31,26 @@ private val onItemDeleted: (item: Product) -> Unit
         fun bind(item: Product) {
             binding.apply {
                 prod.text = item.name
+
+                qty.visibility = View.VISIBLE
+
+                qty.text = item.quantity.toString()
+
+                minus.visibility = View.VISIBLE
+                minus.setOnClickListener {
+                    if (item.quantity > 1) {
+                        item.quantity--
+                        qty.text = item.quantity.toString()
+                        onItemDeleted(item)
+                    }
+                }
+                plus.visibility = View.VISIBLE
+                plus.setOnClickListener {
+                    item.quantity++
+                    qty.text = item.quantity.toString()
+                    onItemDeleted(item)
+                }
+
             }
         }
     }

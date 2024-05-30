@@ -61,6 +61,7 @@ class AddClientFragment : Fragment() {
             val crtList = productLineItemAdapter.currentList
 
             val checkedItems = crtList.filter { it.isChecked }
+            checkedItems.forEach { it.quantity = 1 }
             addedProductLineItemAdapter.submitList(checkedItems.toMutableList())
         }
         binding.productsToAdd.apply {
