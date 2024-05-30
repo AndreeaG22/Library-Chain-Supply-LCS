@@ -4,7 +4,7 @@ class OldLineData (
     val receiver: String,
     val code: String,
     val quantity: Int,
-    val totalSum: Int
+    val totalSum: Double
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -24,7 +24,7 @@ class OldLineData (
         var result = receiver.hashCode()
         result = 31 * result + code.hashCode()
         result = 31 * result + quantity.hashCode()
-        result = 31 * result + totalSum
+        result = 31 * result + totalSum.hashCode()
         return result
     }
 }

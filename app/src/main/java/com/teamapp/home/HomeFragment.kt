@@ -39,21 +39,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-
-        val homeOldList = listOf(
-            OldLineData("John Doe", "1234", 5, 100),
-            OldLineData("Jane Doe", "5678", 10, 200),
-            OldLineData("John Smith", "91011", 15, 300),
-            OldLineData("Jane Smith", "121314", 20, 400),
-            OldLineData("John Johnson", "151617", 25, 500),
-        )
-        homeOldListAdapter.submitList(homeOldList)
         observeViewModel()
 
     }
     private fun observeViewModel() {
         viewModel.futureOrders.observe(viewLifecycleOwner) { homeFutureList ->
             homeFutureListAdapter.submitList(homeFutureList)
+        }
+        viewModel.oldOrders.observe(viewLifecycleOwner) { homeOldList ->
+            homeOldListAdapter.submitList(homeOldList)
         }
     }
     private fun initUI() {
