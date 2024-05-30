@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamapp.home.HomeFragment
 import com.teamapp.lcs.R
 import com.teamapp.lcs.databinding.FragmentSendOrderBinding
+import java.util.Calendar
 
 class SendOrderFragment : Fragment() {
 
@@ -52,16 +53,24 @@ class SendOrderFragment : Fragment() {
         var totalPrice = 0.0
 
         addedProductLineItemAdapter = AddedProductLineItemAdapter { item ->
-//            viewModel.removeProduct(item)
+            val crtList = addedProductLineItemAdapter.currentList
+
+            qty = crtList.sumBy { it.quantity }
+            totalPrice = crtList.sumByDouble { it.price * it.quantity.toDouble() }
+            binding.textView4.text = totalPrice.toString()
+            binding.textView3.text = qty.toString()
         }
 
         productLineItemAdapter = ProductLineItemAdapter {
             val crtList = productLineItemAdapter.currentList
 
             val checkedItems = crtList.filter { it.isChecked }
+            checkedItems.forEach() {
+                it.quantity = 1
+            }
             addedProductLineItemAdapter.submitList(checkedItems.toMutableList())
-            qty = checkedItems.size
-            totalPrice = checkedItems.sumByDouble { it.price }
+            qty = checkedItems.sumBy { it.quantity }
+            totalPrice = checkedItems.sumByDouble { it.price * it.quantity.toDouble() }
 
             binding.textView4.text = totalPrice.toString()
             binding.textView3.text = qty.toString()
@@ -73,14 +82,11 @@ class SendOrderFragment : Fragment() {
                 totalPrice,
                 binding.recipientsAddress.text.toString(),
                 binding.recipientName.text.toString(),
-                // get me the current date
-                "2024-05-31"
+                generateDate()
             )
-            // Send order
+
             Toast.makeText(requireContext(), "Order sent!", Toast.LENGTH_SHORT).show()
-            // go back to previous fragment go back to previous fragment
-//            parentFragmentManager.popBackStack() // TODO: check if this works
-            // clear back stack and go to home fragment
+
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, HomeFragment.newInstance())
                 .commit()
@@ -95,6 +101,12 @@ class SendOrderFragment : Fragment() {
             adapter = addedProductLineItemAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+
+    }
+
+    private fun generateDate(): String {
+        val calendar = Calendar.getInstance()
+        return "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.YEAR)}"
 
     }
 }
