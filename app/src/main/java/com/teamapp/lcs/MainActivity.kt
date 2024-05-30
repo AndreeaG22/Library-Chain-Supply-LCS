@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getArguments() {
-        email = intent.getStringExtra("email") ?: ""
+        email = FirebaseAuth.getInstance().currentUser?.email ?: ""
     }
 
     private fun initDrawer(binding: ActivityMainBinding) {
@@ -74,8 +74,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.nav_text).text = email
-
-        email = FirebaseAuth.getInstance().currentUser?.email ?: ""
         configureMenuItems(binding.navView.menu)
 
         binding.navView.setNavigationItemSelectedListener { menuItem ->
