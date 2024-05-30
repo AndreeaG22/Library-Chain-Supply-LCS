@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
             homeFutureListAdapter.submitList(homeFutureList)
         }
         viewModel.oldOrders.observe(viewLifecycleOwner) { homeOldList ->
-            homeOldListAdapter.submitList(homeOldList)
+            homeOldListAdapter.submitList(homeOldList.take(5))
         }
     }
     private fun initUI() {
