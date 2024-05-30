@@ -39,16 +39,6 @@
                 app:navigationIcon="@drawable/ic_drawer"
                 />
 
-            <ImageView
-                android:id="@+id/notif"
-                android:layout_width="46dp"
-                android:layout_height="43dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/notif"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
