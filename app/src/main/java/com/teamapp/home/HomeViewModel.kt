@@ -26,10 +26,18 @@ class HomeViewModel : ViewModel() {
     private fun getSumProducts(products: List<Product>): Double {
         var sum = 0.0
         for (product in products) {
-            sum += product.price
+            sum += product.price * product.quantity
         }
         return sum
 
+    }
+
+    private fun getQuantityProducts(products: List<Product>): Int {
+        var quantity = 0
+        for (product in products) {
+            quantity += product.quantity
+        }
+        return quantity
     }
 
     private fun getOldOrders() {
@@ -67,9 +75,9 @@ class HomeViewModel : ViewModel() {
                     val client = clientSnapshot.getValue(Client::class.java)
                     client?.let {
                         futureOrdersList.add(FutureLineData(
-                            it.address,
+                            it.email,
                             it.date_deliery,
-                            it.address,
+                            getQuantityProducts(it.products),
                             getSumProducts(it.products)
                         ))
                     }
