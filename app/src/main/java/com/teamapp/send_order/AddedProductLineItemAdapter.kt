@@ -91,11 +91,11 @@ private val onQtyChanged: (item: Product) -> Unit,
 
     object DiffCallback : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.name == newItem.name && oldItem.quantity == newItem.quantity && oldItem.isChecked == newItem.isChecked
         }
 
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.name == newItem.name && oldItem.quantity == newItem.quantity && oldItem.isChecked == newItem.isChecked
         }
     }
 }

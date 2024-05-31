@@ -51,8 +51,8 @@ class HomeViewModel : ViewModel() {
                         oldOrdersList.add(OldLineData(
                             it.email,
                             it.getNumberReceipt(),
-                            it.products.size,
-                            it.totalPrice
+                            getQuantityProducts(it.products),
+                            getSumProducts(it.products)
                         ))
                     }
                 }

@@ -30,33 +30,30 @@ class ProductLineItemAdapter (
         fun bind(item: Product) {
             binding.apply {
                 prod.text = item.name
-
                 price.visibility = View.VISIBLE
                 price.text = item.price.toString()
 
-                checkBox.setOnCheckedChangeListener { _, isChecked ->
-                    if (isChecked) {
-                        // set the item to checked
-                        item.isChecked = true
-                        onItemUpdated()
-                    } else {
-                        // set the item to unchecked
-                        item.isChecked = false
-                        onItemUpdated()
-                    }
-                }
+                // Clear previous listener
+                checkBox.setOnCheckedChangeListener(null)
+                // Set the checkbox state
+                checkBox.isChecked = item.isChecked
 
+                // Set the new listener
+                checkBox.setOnCheckedChangeListener { _, isChecked ->
+                    item.isChecked = isChecked
+                    onItemUpdated()
+                }
             }
         }
     }
 
     object DiffCallback : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.name == newItem.name && oldItem.quantity == newItem.quantity && oldItem.isChecked == newItem.isChecked
         }
 
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.name == newItem.name && oldItem.quantity == newItem.quantity && oldItem.isChecked == newItem.isChecked
         }
     }
 }
