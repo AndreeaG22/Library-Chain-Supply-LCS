@@ -26,9 +26,9 @@ class ResourcesManagementViewModel : ViewModel() {
         productRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val existingQty = snapshot.child("qty").getValue(Int::class.java) ?: 0
+                    val existingQty = snapshot.child("quantity").getValue(Int::class.java) ?: 0
                     val newQty = existingQty + qty
-                    productRef.child("qty").setValue(newQty)
+                    productRef.child("quantity").setValue(newQty)
                 } else {
                     val product = Product(name = name, quantity = qty)
                     productRef.setValue(product)
