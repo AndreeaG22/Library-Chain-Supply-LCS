@@ -153,7 +153,7 @@ class SendOrderFragment : Fragment() {
     ) {
         // Save the order as a PDF
         val pdf = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(300, 600, 1).create()
+        val pageInfo = PdfDocument.PageInfo.Builder(700, 600, 1).create()
 
         val page = pdf.startPage(pageInfo)
         val canvas = page.canvas
