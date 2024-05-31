@@ -10,7 +10,7 @@ import com.teamapp.ReceiptData
 import com.teamapp.lcs.databinding.ReceiptLineItemBinding
 
 class ReceiptLineItemAdapter (
-    private val onItemDeleted: (item: ReceiptData) -> Unit
+    private val onItemClicked: (item: ReceiptData) -> Unit
 ): ListAdapter<ReceiptData, RecyclerView.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -33,8 +33,9 @@ class ReceiptLineItemAdapter (
                 recipientEmail.text = item.email
                 dateReceipt.text = item.date
                 recipientAddress.text = item.destination
-                ivIcon.setOnClickListener {
+                headerConstraintsLayout.setOnClickListener {
                     // create receipt
+                    onItemClicked(item)
                 }
             }
         }

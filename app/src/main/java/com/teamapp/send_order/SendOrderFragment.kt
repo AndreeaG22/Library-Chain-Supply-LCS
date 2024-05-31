@@ -1,16 +1,22 @@
 package com.teamapp.send_order
 
-import androidx.fragment.app.viewModels
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.storage.FirebaseStorage
 import com.teamapp.home.HomeFragment
 import com.teamapp.lcs.R
 import com.teamapp.lcs.databinding.FragmentSendOrderBinding
+import java.io.File
 import java.util.Calendar
 
 class SendOrderFragment : Fragment() {
@@ -98,6 +104,15 @@ class SendOrderFragment : Fragment() {
             for (product in addedProductLineItemAdapter.currentList) {
                 viewModel.updateQty(product, product.quantity)
             }
+
+            savePdf(
+                addedProductLineItemAdapter.currentList,
+                totalPrice,
+                binding.recipientsAddress.text.toString(),
+                binding.recipientName.text.toString(),
+                generateDate()
+            )
+
             Toast.makeText(requireContext(), "Order sent!", Toast.LENGTH_SHORT).show()
 
             parentFragmentManager.beginTransaction()
@@ -117,9 +132,86 @@ class SendOrderFragment : Fragment() {
 
     }
 
+    private fun savePdf(
+        currentList: List<Product>,
+        totalPrice: Double,
+        toString: String,
+        toString1: String,
+        generateDate: String
+    ) {
+        // Save the order as a PDF
+        val pdf = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(300, 600, 1).create()
+
+        val page = pdf.startPage(pageInfo)
+        val canvas = page.canvas
+
+        val paint = Paint()
+        paint.textSize = 20f
+        var text = "Order"
+        canvas.drawText(text, 80f, 50f, paint)
+
+        paint.textSize = 10f
+        text = "Date: $generateDate"
+        canvas.drawText(text, 80f, 80f, paint)
+
+        text = "Recipient: $toString1"
+        canvas.drawText(text, 80f, 110f, paint)
+
+        text = "Address: $toString"
+        canvas.drawText(text, 80f, 140f, paint)
+
+        text = "Products:"
+        canvas.drawText(text, 80f, 170f, paint)
+
+        var y = 200f
+        currentList.forEach {
+            text = "${it.name} - ${it.quantity} x ${it.price}"
+            canvas.drawText(text, 80f, y, paint)
+            y += 30f
+        }
+
+        text = "Total price: $totalPrice"
+        canvas.drawText(text, 80f, y, paint)
+
+        pdf.finishPage(page)
+
+        val docsFolder = requireContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+        val pdfFile = File(docsFolder, "order_$toString1-$generateDate.pdf")
+
+        pdf.writeTo(pdfFile.outputStream())
+        pdf.close()
+
+        savePdfToFirebase(pdfFile)
+    }
+
+    private fun savePdfToFirebase(pdfFile: File) {
+        // Save the PDF to Firebase
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference
+        val pdfRef = storageRef.child(pdfFile.name)
+
+        val uri = Uri.fromFile(pdfFile)
+
+        val uploadTask = pdfRef.putFile(uri)
+        uploadTask.addOnSuccessListener {
+            pdfRef.downloadUrl.addOnSuccessListener { uri ->
+                val downloadUrl = uri.toString()
+                // Save the download URL to the database
+            }
+        }.addOnFailureListener { exception ->
+            println("Failed to upload PDF: ${exception.message}")
+        }
+    }
+
+
     private fun generateDate(): String {
         val calendar = Calendar.getInstance()
-        return "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.YEAR)}"
+        return "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${
+            calendar.get(
+                Calendar.YEAR
+            )
+        }"
 
     }
 }

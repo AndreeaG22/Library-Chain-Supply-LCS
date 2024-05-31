@@ -1,7 +1,11 @@
 package com.teamapp.resources_management
 
 import android.app.Dialog
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +14,13 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.storage.FirebaseStorage
 import com.teamapp.lcs.databinding.AddProductLayoutBinding
 import com.teamapp.lcs.databinding.ErrorDialogBinding
 import com.teamapp.lcs.databinding.FragmentResourcesManagementBinding
 import com.teamapp.lcs.databinding.OrderProductLayoutBinding
 import com.teamapp.send_order.Product
+import java.io.File
 
 class ResourcesManagementFragment : Fragment() {
 
