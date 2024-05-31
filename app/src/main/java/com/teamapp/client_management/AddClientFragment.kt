@@ -58,12 +58,26 @@ class AddClientFragment : Fragment() {
         }
 
         productLineItemAdapter = ProductLineItemAdapter {
-            val crtList = productLineItemAdapter.currentList
+            val addedProducts = addedProductLineItemAdapter.currentList.toMutableList()
+            val checkedItems = productLineItemAdapter.currentList.filter { it.isChecked }
 
-            val checkedItems = crtList.filter { it.isChecked }
-            checkedItems.forEach { it.quantity = 1 }
-            addedProductLineItemAdapter.submitList(checkedItems.toMutableList())
+            // Add new checked items with quantity set to 1
+            checkedItems.forEach { checkedItem ->
+                if (!addedProducts.contains(checkedItem)) {
+                    checkedItem.quantity = 1
+                    addedProducts.add(checkedItem)
+                }
+            }
+
+            // Remove unchecked items from addedProducts
+            val uncheckedItems = productLineItemAdapter.currentList.filter { !it.isChecked }
+            uncheckedItems.forEach { uncheckedItem ->
+                addedProducts.remove(uncheckedItem)
+            }
+
+            addedProductLineItemAdapter.submitList(addedProducts)
         }
+
         binding.productsToAdd.apply {
             adapter = productLineItemAdapter
             layoutManager = LinearLayoutManager(requireContext())
